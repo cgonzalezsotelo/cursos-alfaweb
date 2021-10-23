@@ -1,9 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Pacientes from "../views/Pacientes.vue";
-import CrearPaciente from "../views/CrearPaciente.vue";
-import EditarPaciente from "../views/EditarPaciente.vue";
+import Cursos from "../views/Cursos.vue";
+import CursosAdmin from "../views/CursosAdmin.vue";
+import CrearCurso from "../views/CrearCurso.vue";
+import EditarCurso from "../views/EditarCurso.vue";
 
 import Firebase from "firebase";
 
@@ -16,25 +17,33 @@ const routes = [
     component: Home,
   },
   {
-    path: "/pacientes",
-    name: "Pacientes",
-    component: Pacientes,
+    path: "/cursos",
+    name: "Cursos",
+    component: Cursos,
     meta: {
       login: true,
     },
   },
   {
-    path: "/crearPaciente",
-    name: "Crear Paciente",
-    component: CrearPaciente,
+    path: "/admin",
+    name: "Administracion",
+    component: CursosAdmin,
     meta: {
       login: true,
     },
   },
   {
-    path: "/pacientes/:id",
-    name: "Editar Paciente",
-    component: EditarPaciente,
+    path: "/crearCurso",
+    name: "Crear Curso",
+    component: CrearCurso,
+    meta: {
+      login: true,
+    },
+  },
+  {
+    path: "/cursos/:id",
+    name: "Editar Curso",
+    component: EditarCurso,
     meta: {
       login: true,
     },
@@ -53,7 +62,7 @@ router.beforeEach((to, from, next) => {
   if (!email && authRequired) {
     next("/");
   } else if (email && !authRequired) {
-    next("pacientes");
+    next("cursos");
   } else {
     next();
   }

@@ -15,6 +15,12 @@
     ></v-text-field>
     <v-layout>
       <v-btn class="mx-1" color="success" type="submit">Registrarse</v-btn>
+      <v-btn class="mx-1" color="amber" type="button" @click="resetValidation"
+        >Reiniciar Validación</v-btn
+      >
+      <v-btn class="mx-1" color="error" type="reset" @click="resetForm"
+        >Reiniciar Formulario</v-btn
+      >
     </v-layout>
   </v-form>
 </template>
@@ -28,6 +34,28 @@ export default {
     },
   }),
   methods: {
+    // async handleFormSubmit() {
+    //   if (this.$refs.userFormRegister.validate()) {
+    //     try {
+    //       await Firebase.auth().signInWithEmailAndPassword(
+    //         this.form.email,
+    //         this.form.password
+    //       );
+    //       this.$store.dispatch(
+    //         "sesion/configurarUsuario",
+    //         Firebase.auth().currentUser
+    //       );
+    //       this.$router.push("/cursos");
+    //       this.$emit("success");
+    //     } catch (e) {
+    //       console.error("me fue mal con el login");
+    //     }
+    //   }
+    // },
+    resetValidation() {
+      this.$$refs.userFormRegister.resetValidation();
+    },
+    resetForm() {},
     required(value) {
       return !!value || "Este campo es obligatorio";
     },
