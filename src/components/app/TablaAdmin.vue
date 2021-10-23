@@ -1,18 +1,10 @@
 <template>
-  <v-data-table :items="$store.state.cursos.data" :headers="headers">
-    <template v-slot:item.costo="{ item }">
-      <v-chip color="success">${{ item.costo.toLocaleString("de-DE") }}</v-chip>
-    </template>
-    <template v-slot:item.estado="{ item }">
-      <v-chip :color="item.estado ? 'info' : 'gray'">{{
-        item.estado ? "Si" : "No"
-      }}</v-chip>
-    </template>
+  <v-data-table :items="$store.state.pacientes.data" :headers="headers">
     <template v-slot:item.acciones="{ item }">
-      <v-btn icon @click="editarCurso(item)">
+      <v-btn icon @click="editarPaciente(item)">
         <v-icon> mdi-pencil-outline </v-icon>
       </v-btn>
-      <v-btn icon @click="borrarCurso(item)">
+      <v-btn icon @click="borrarPaciente(item)">
         <v-icon> mdi-delete-empty </v-icon>
       </v-btn>
     </template>
@@ -23,42 +15,39 @@ import Firebase from "firebase";
 export default {
   beforeRouteEnter(to, from, next) {
     Firebase.firestore()
-      .collection("cursos")
+      .collection("pacientes")
       .doc(to.params.id)
       .get()
       .then((document) => {
         next((vm) => {
-          vm.curso = { id: document.id, ...document.data() };
+          vm.paciente = { id: document.id, ...document.data() };
         });
       });
   },
   data: () => ({
     headers: [
-      { text: "Curso", value: "nombre" },
-      { text: "Cupos", value: "cupos" },
-      { text: "Incritos", value: "inscritos" },
-      { text: "Duración", value: "duracion" },
-      { text: "Costo", value: "costo" },
-      { text: "Terminado", value: "estado" },
+      { text: "Nombre", value: "nombre" },
+      { text: "Apellido", value: "apellido" },
+      { text: "Prevision", value: "prevision" },
       { text: "Acciones", value: "acciones" },
     ],
-    curso: null,
+    paciente: null,
   }),
   mounted() {
-    this.$store.dispatch("cursos/traerTodosLosCursos");
+    this.$store.dispatch("pacientes/traerTodosLosPacientes");
   },
   methods: {
-    editarCurso(item) {
-      this.$router.push(`cursos/${item.id}`);
+    editarPaciente(item) {
+      this.$router.push(`pacientes/${item.id}`);
     },
-    borrarCurso(item) {
+    borrarPaciente(item) {
       Firebase.firestore()
-        .collection("cursos")
+        .collection("pacientes")
         .doc(item.id)
         .delete()
         .then(() => {
           console.log("elemento borrado");
-          this.$store.dispatch("cursos/traerTodosLosCursos");
+          this.$store.dispatch("pacientes/traerTodosLosPacientes");
         });
     },
   },
