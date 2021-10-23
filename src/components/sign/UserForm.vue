@@ -15,12 +15,6 @@
     ></v-text-field>
     <v-layout>
       <v-btn class="mx-1" color="success" type="submit">Iniciar Sesión</v-btn>
-      <v-btn class="mx-1" color="amber" type="button" @click="resetValidation"
-        >Reiniciar Validación</v-btn
-      >
-      <v-btn class="mx-1" color="error" type="reset" @click="resetForm"
-        >Reiniciar Formulario</v-btn
-      >
     </v-layout>
   </v-form>
 </template>
@@ -45,7 +39,7 @@ export default {
             "sesion/configurarUsuario",
             Firebase.auth().currentUser
           );
-          this.$router.push("/cursos");
+          this.$router.push("/pacientes");
           this.$emit("success");
         } catch (e) {
           console.error("me fue mal con el login");

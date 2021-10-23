@@ -4,7 +4,7 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 import { moduloSesion } from "./modules/sesion";
-import { moduloCursos } from "./modules/cursos";
+import { moduloPacientes } from "./modules/pacientes";
 
 export default new Vuex.Store({
   state: {},
@@ -12,6 +12,6 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     sesion: moduloSesion,
-    cursos: moduloCursos,
+    pacientes: moduloPacientes,
   },
 });

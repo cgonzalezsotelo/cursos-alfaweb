@@ -22,7 +22,6 @@ export default {
 
   data: () => ({
     drawer: false,
-    // cursos: [],
   }),
   methods: {
     toggleDrawer() {

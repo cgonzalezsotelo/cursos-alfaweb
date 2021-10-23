@@ -11,15 +11,9 @@
         </v-col>
       </v-row>
     </v-container>
-    <!-- <v-row>
-      <v-col v-for="curso in $store.state.cursos.data" :key="curso.id">
-        <Card :value="curso" />
-      </v-col>
-    </v-row> -->
   </div>
 </template>
 <script>
-// import Card from "../components/app/Card.vue";
 import SignInDialog from "../components/sign/SignInDialog.vue";
 import Registrar from "../components/sign/Registrar.vue";
 import Store from "../store";
@@ -29,11 +23,8 @@ export default {
     SignInDialog,
     Registrar,
   },
-  // mounted() {
-  //   this.$store.dispatch("cursos/traerTodosLosCursos");
-  // },
   beforeRouteEnter(to, from, next) {
-    Store.dispatch("cursos/traerTodosLosCursos");
+    Store.dispatch("pacientes/traerTodosLosPacientes");
     next();
   },
 };
