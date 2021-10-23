@@ -86,9 +86,12 @@ export default {
           .collection("cursos")
           .add(this.formCurso)
           .then(() => {
+            this.loading = false;
             this.$router.push("/admin");
           })
-          .catch(() => {});
+          .catch(() => {
+            this.loading = false;
+          });
       }
     },
     resetValidation() {
